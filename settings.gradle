@@ -1,2 +1,3 @@
 rootProject.name = 'springframework'
+include 'spring-security'
 
