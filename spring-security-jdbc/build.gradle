@@ -8,6 +8,10 @@ group = 'com.practice'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
+springBoot {
+    mainClass.value("org.practice.springsecurity.SpringSecurityApplication")
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
