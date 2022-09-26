@@ -1,4 +1,5 @@
 rootProject.name = 'springframework'
 include 'spring-security'
 include 'spring-security-jdbc'
+include 'spring-security-jpa'
 

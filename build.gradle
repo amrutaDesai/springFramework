@@ -4,33 +4,58 @@ plugins {
     id 'java'
 }
 
-group = 'com.practice'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation group: 'org.springframework', name: 'spring-jdbc', version: '5.3.23'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
-    implementation group: 'com.h2database', name: 'h2', version: '2.1.214'
+group = 'com.practice'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
 
+subprojects {
+    apply plugin:'base'
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+allprojects {
+    group = 'com.practice'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '17'
+
+    repositories {
+        mavenCentral()
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    task('hello').doLast {
+        println "I'm $project.name"
+    }
+
+    apply from: "$rootProject.projectDir/dependencies.gradle"
+
+    dependencies {
+        annotationProcessor libs.lombok
+        implementation libs.springBootStarterDataRest
+        implementation libs.springBootStarterSecurity
+        implementation libs.springBootStarterWeb
+        implementation libs.springBootStarterDataJPA
+        implementation test.springBootStarterTest
+        implementation test.springSecurityTest
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+dependencies {
+    implementation group: 'com.h2database', name: 'h2', version: '2.1.214'
 }

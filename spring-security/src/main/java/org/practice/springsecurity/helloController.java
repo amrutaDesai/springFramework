@@ -8,16 +8,16 @@ public class helloController {
 
     @GetMapping("/")
     public String sayHello() {
-        return "Hello";
+        return "Hello in basic authentication & Authorization principle";
     }
 
     @GetMapping("/user")
     public String user() {
-        return "Hello User";
+        return "Hello User in basic authentication & Authorization principle";
     }
 
     @GetMapping("/admin")
     public String admin() {
-        return "Hello Admin";
+        return "Hello Admin in basic authentication & Authorization principle";
     }
 }
